@@ -1,0 +1,24 @@
+﻿Build started 28/04/2017 15:34:11.
+     1>Project "C:\hlocal\freeglut project 3D (2012)\freeglut project 3D\freeglut project 3D.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /I"C:\hlocal\freeglut project 3D (2012)\freeglut\include\\" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Cara.cpp FalsoTetraedro.cpp Hipotrocoide.cpp Malla.cpp PuntoVector3D.cpp VerticeNormal.cpp
+         VerticeNormal.cpp
+         PuntoVector3D.cpp
+         Malla.cpp
+         Hipotrocoide.cpp
+         FalsoTetraedro.cpp
+     1>c:\hlocal\freeglut project 3d (2012)\freeglut project 3d\falsotetraedro.cpp(10): error C2065: 'modo' : undeclared identifier
+     1>c:\hlocal\freeglut project 3d (2012)\freeglut project 3d\falsotetraedro.cpp(66): error C2065: 'modo' : undeclared identifier
+         Cara.cpp
+         Generating Code...
+     1>c:\hlocal\freeglut project 3d (2012)\freeglut project 3d\hipotrocoide.cpp(24): error C4716: 'Hipotrocoide::C’’' : must return a value
+     1>c:\hlocal\freeglut project 3d (2012)\freeglut project 3d\hipotrocoide.cpp(18): error C4716: 'Hipotrocoide::C' : must return a value
+     1>c:\hlocal\freeglut project 3d (2012)\freeglut project 3d\hipotrocoide.cpp(21): error C4716: 'Hipotrocoide::C’' : must return a value
+     1>c:\hlocal\freeglut project 3d (2012)\freeglut project 3d\hipotrocoide.cpp(27): error C4716: 'Hipotrocoide::T' : must return a value
+     1>c:\hlocal\freeglut project 3d (2012)\freeglut project 3d\hipotrocoide.cpp(33): error C4716: 'Hipotrocoide::N' : must return a value
+     1>c:\hlocal\freeglut project 3d (2012)\freeglut project 3d\hipotrocoide.cpp(30): error C4716: 'Hipotrocoide::B' : must return a value
+     1>Done Building Project "C:\hlocal\freeglut project 3D (2012)\freeglut project 3D\freeglut project 3D.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.32
