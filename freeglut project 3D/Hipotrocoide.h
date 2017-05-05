@@ -5,7 +5,7 @@ class Hipotrocoide: public Malla
 public: 
 	Hipotrocoide(int nP, int nQ, GLfloat a, GLfloat b, GLfloat c);
 	~Hipotrocoide();
-	GLfloat t = 0.0f;
+	
 	GLfloat a, b, c; //parámetros de la curva
 	int nP; //número de lados del polígono que aproxima el grosor de la curva
 	int nQ; //número de de muestras que se toman en la curva
@@ -24,6 +24,7 @@ public:
 	PuntoVector3D* derivar(GLfloat t);
 	PuntoVector3D* curva(GLfloat t);
 	PuntoVector3D* derivar2(GLfloat t);
+	PuntoVector3D* aplicarMatriz(PuntoVector3D* p);
 	//PuntoVector3D* C(t), C’(t), C’’(t), T(t), B(t), N(t); métodos necesarios para rellenar la matriz m
 		//Constructora
 
@@ -40,3 +41,7 @@ public:
 
 };
 
+
+
+
+///la cara se crea con (i,i-nP,(i+1) -nP, i+1)
