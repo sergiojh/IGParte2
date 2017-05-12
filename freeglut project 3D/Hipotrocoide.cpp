@@ -20,6 +20,7 @@ Hipotrocoide::Hipotrocoide(int nP, int nQ, GLfloat a, GLfloat b, GLfloat c)
 	numeroVertices = nQ*nP + nP;
 	GLdouble incr = 2 * 3.1416 / nP;
 	perfil = new PuntoVector3D*[nP];
+	//creamos un perfil en el origen
 	for (int i = 0; i < nP; i++){
 		perfil[i] = new PuntoVector3D(0.8*cos(incr*i), 0.8* sin(incr*i), 0, 1);
 
@@ -27,19 +28,21 @@ Hipotrocoide::Hipotrocoide(int nP, int nQ, GLfloat a, GLfloat b, GLfloat c)
 	cargarMatriz(t);
 	int iC = 0;
 	int iV = 0;
+	//movemos el `primer perfil a su sitio
 	for (int i = 0; i < nP; i++){
 		vertice[iV]= aplicarMatriz(perfil[i]);
 		iV++;
 	}
+	//mueve los demas perfiles a sus sitios
+	//iV-iv+1-(iv-nP)-(iv-np+1)
 	for (int i = 0; i < nQ; i++){
 
 		t += 0.2f; 
 		cargarMatriz(t);
 		for (int i = 0; i < nP; i++){
-			vertice[iV] = aplicarMatriz(perfil[i]);
-
+			vertice[iV] = aplicarMatriz(perfil[i]);		
 		}
-		newell();
+		crearRodaja(iV,iC);
 	}
 }
 PuntoVector3D* Hipotrocoide::C(GLfloat t){
@@ -100,8 +103,16 @@ PuntoVector3D* Hipotrocoide::aplicarMatriz(PuntoVector3D* p){
 		m[2] * p->getX() + m[6] * p->getY() + m[10] * p->getZ() + m[14],
 		1);
 }
-void Hipotrocoide::crearRodaja(int blyat, int numeroPerfil, int numeroPefilCyka){
-
+void Hipotrocoide::crearRodaja(int indiceVertices,int indiceCaras){
+	for (int i = indiceVertices-nP+1; i < indiceVertices; i++){
+		VerticeNormal** vn = new VerticeNormal*[4];
+		vn[0] = new VerticeNormal(i,indiceCaras);
+		vn[1] = new VerticeNormal(i+1, indiceCaras);
+		vn[2] = new VerticeNormal(i-nP, indiceCaras);
+		vn[3] = new VerticeNormal(i-nP+1, indiceCaras);
+		cara[indiceCaras] = new Cara(4, vn);
+		
+	}
 }
 PuntoVector3D* Hipotrocoide::derivar(GLfloat t){
 	return new PuntoVector3D(-(a - b)*sin(t) - c*((a - b) / b)*sin(t*((a - b) / b)),//coordenada 1

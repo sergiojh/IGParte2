@@ -20,7 +20,7 @@ public:
 	PuntoVector3D* N(GLfloat t);
 	void newell();
 	void cargarMatriz(GLfloat t);
-	void crearRodaja(int blyat, int numeroPerfil, int numeroPefilCyka);
+	void crearRodaja(int indiceVertices,int indiceCaras);
 	PuntoVector3D* derivar(GLfloat t);
 	PuntoVector3D* curva(GLfloat t);
 	PuntoVector3D* derivar2(GLfloat t);
