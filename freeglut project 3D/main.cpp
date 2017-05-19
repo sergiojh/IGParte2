@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
-
+#include "Hipotrocoide.h"
 #include <GL/freeglut.h>
 //#include <GL/glut.h>
 
@@ -25,6 +25,7 @@ GLdouble upX=0, upY=1, upZ=0;
 
 // Scene variables
 GLfloat angX, angY, angZ; 
+Hipotrocoide* hipo;
 
 void buildSceneObjects() {	 
     angX=0.0f;
@@ -71,6 +72,7 @@ void initGL() {
 
 void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
+	
 
 	glMatrixMode(GL_MODELVIEW);	 
 	glPushMatrix();
@@ -98,9 +100,10 @@ void display(void) {
 		 		
 		// Drawing the scene	 		 
 		glColor3f(1.0, 1.0, 1.0);
-		glutSolidSphere(6, 50, 60); //Sphere: radius=6, meridians=50, parallels=60
+		hipo->dibuja();
+		//glutSolidSphere(6, 50, 60); //Sphere: radius=6, meridians=50, parallels=60
 	glPopMatrix();
- 
+	
 	glFlush();
 	glutSwapBuffers();
 }
@@ -178,7 +181,7 @@ int main(int argc, char *argv[]){
 
 	// OpenGL basic setting
 	initGL();
-
+	hipo = new Hipotrocoide(10, 300, 7, 4, 2);
 	// Freeglut's main loop can be stopped executing (**)
 	// while (continue_in_main_loop) glutMainLoopEvent();
 

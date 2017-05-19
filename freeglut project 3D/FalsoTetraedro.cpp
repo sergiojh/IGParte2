@@ -7,7 +7,6 @@ FalsoTetraedro::FalsoTetraedro() {
 	normal=new PuntoVector3D*[numeroNormales];
     numeroCaras=4;
     cara=new Cara*[numeroCaras];
-    modo=false;
 
 	// Vértices  
 	vertice[0]=new PuntoVector3D(0.0f, 0.0f, 0.0f, 1);
@@ -63,8 +62,8 @@ FalsoTetraedro::~FalsoTetraedro() {
 
 void FalsoTetraedro::dibuja() {	 	 	 
 	for (int i=0; i<numeroCaras; i++) {		
-		if (!modo) glBegin(GL_POLYGON);
-		else glBegin(GL_LINE_LOOP);
+
+		glBegin(GL_LINE_LOOP);
 		if (i==0) glColor3f(1.0f, 1.0f, 1.0f);
 		if (i==1) glColor3f(0.0f, 0.0f, 1.0f);
 		if (i==2) glColor3f(1.0f, 0.0f, 0.0f);

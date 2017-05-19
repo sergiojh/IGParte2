@@ -7,6 +7,7 @@ public:
 	~Hipotrocoide();
 	
 	GLfloat a, b, c; //parámetros de la curva
+	GLdouble t;
 	int nP; //número de lados del polígono que aproxima el grosor de la curva
 	int nQ; //número de de muestras que se toman en la curva
 	GLfloat m[16]; //matriz para pasar el perfil a la curva
@@ -18,11 +19,11 @@ public:
 	PuntoVector3D* T(GLfloat t);
 	PuntoVector3D* B(GLfloat t);
 	PuntoVector3D* N(GLfloat t);
-	void newell();
+	PuntoVector3D* newell(Cara* c);
 	void cargarMatriz(GLfloat t);
-	void crearRodaja(int indiceVertices,int indiceCaras);
 	PuntoVector3D* derivar(GLfloat t);
 	PuntoVector3D* curva(GLfloat t);
+	void creaPerfil();
 	PuntoVector3D* derivar2(GLfloat t);
 	PuntoVector3D* aplicarMatriz(PuntoVector3D* p);
 	//PuntoVector3D* C(t), C’(t), C’’(t), T(t), B(t), N(t); métodos necesarios para rellenar la matriz m
