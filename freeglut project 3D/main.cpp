@@ -4,6 +4,7 @@
 #include "Hipotrocoide.h"
 #include <GL/freeglut.h>
 //#include <GL/glut.h>
+#include <vector>
 
 #include <iostream>
 using namespace std;
@@ -14,7 +15,7 @@ using namespace std;
 
 // Viewport size
 int WIDTH= 500, HEIGHT= 500;
-
+GLfloat t = 0;
 // Viewing frustum parameters
 GLdouble xRight=10, xLeft=-xRight, yTop=10, yBot=-yTop, N=1, F=1000;
 
@@ -24,9 +25,24 @@ GLdouble lookX=0.0, lookY=0.0, lookZ=0.0;
 GLdouble upX=0, upY=1, upZ=0;
 
 // Scene variables
+std::vector <GLUquadric*> tapas(4);
+std::vector <GLUquadric*> ruedas(4);
+
 GLfloat angX, angY, angZ; 
 Hipotrocoide* hipo;
+void CreaCoche(){
 
+	//inicializo las ruedas
+	for (unsigned int i = 0; i < 4; i++){
+		tapas[i] = gluNewQuadric();
+		
+		ruedas[i] = gluNewQuadric();
+	}
+	glPushMatrix();
+	glScaled(0.3, 0.3, 0.3);
+	glutSolidCube(3);
+	glPopMatrix();
+}
 void buildSceneObjects() {	 
     angX=0.0f;
     angY=0.0f;
@@ -101,6 +117,12 @@ void display(void) {
 		// Drawing the scene	 		 
 		glColor3f(1.0, 1.0, 1.0);
 		hipo->dibuja();
+		glPushMatrix();
+		glTranslated(hipo->C(t)->getX(), hipo->C(t)->getY(), hipo->C(t)->getZ());
+		float movimientoCoche = 0;
+		movimientoCoche = atan2((double)hipo->C’(t)->getX(), (double)hipo->C’(t)->getZ()) * 180 / 3.141519;
+		glRotated(movimientoCoche + 45, 0, 1, 0);
+		CreaCoche();
 		//glutSolidSphere(6, 50, 60); //Sphere: radius=6, meridians=50, parallels=60
 	glPopMatrix();
 	
@@ -150,6 +172,8 @@ void key(unsigned char key, int x, int y){
 		case 'x': angY=angY-5; break;
 		case 'd': angZ=angZ+5; break;
 		case 'c': angZ=angZ-5; break;  
+		case 'w': t += 0.15; break;
+		case 'q': t -= 0.15;; break;
 		default:
 			need_redisplay = false;
 			break;
@@ -181,7 +205,7 @@ int main(int argc, char *argv[]){
 
 	// OpenGL basic setting
 	initGL();
-	hipo = new Hipotrocoide(10, 300, 7, 4, 2);
+	hipo = new Hipotrocoide(5, 150, 7, 4, 2);
 	// Freeglut's main loop can be stopped executing (**)
 	// while (continue_in_main_loop) glutMainLoopEvent();
 
