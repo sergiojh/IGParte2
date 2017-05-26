@@ -1,22 +1,21 @@
-﻿Compilación iniciada a las 25/05/2017 19:22:15.
-     1>Proyecto "C:\Users\Pablo Gómez\Desktop\IGParte2\freeglut project 3D\freeglut project 3D.vcxproj" en el nodo 2 (Build destinos).
+﻿Compilación iniciada a las 26/05/2017 16:23:41.
+     1>Proyecto "C:\hlocal\IGParte2\freeglut project 3D\freeglut project 3D.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Pablo Gómez\Desktop\IGParte2\freeglut\include\\" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /IC:\hlocal\IGParte2\freeglut\include\ /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\main.cpp(123): warning C4244: '=' : conversión de 'double' a 'float'; posible pérdida de datos
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\main.cpp(175): warning C4305: '+=' : truncamiento de 'double' a 'GLfloat'
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\main.cpp(176): warning C4305: '-=' : truncamiento de 'double' a 'GLfloat'
+     1>c:\hlocal\igparte2\freeglut project 3d\main.cpp(188): warning C4305: '+=' : truncamiento de 'double' a 'GLfloat'
+     1>c:\hlocal\igparte2\freeglut project 3d\main.cpp(189): warning C4305: '-=' : truncamiento de 'double' a 'GLfloat'
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Pablo Gómez\Desktop\IGParte2\Debug\freeglut project 3D.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Pablo Gómez\Desktop\IGParte2\freeglut\lib\\" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Pablo Gómez\Desktop\IGParte2\Debug\freeglut project 3D.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Pablo Gómez\Desktop\IGParte2\Debug\freeglut project 3D.lib" /MACHINE:X86 Debug\Cara.obj
+         C:\software\programacion\MSVStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\hlocal\IGParte2\Debug\freeglut project 3D.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\hlocal\IGParte2\freeglut\lib\ kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\hlocal\IGParte2\Debug\freeglut project 3D.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\hlocal\IGParte2\Debug\freeglut project 3D.lib" /MACHINE:X86 Debug\Cara.obj
          Debug\FalsoTetraedro.obj
          Debug\Hipotrocoide.obj
          Debug\main.obj
          Debug\Malla.obj
          Debug\PuntoVector3D.obj
          Debug\VerticeNormal.obj
-         freeglut project 3D.vcxproj -> C:\Users\Pablo Gómez\Desktop\IGParte2\Debug\freeglut project 3D.exe
-     1>Compilación del proyecto terminada "C:\Users\Pablo Gómez\Desktop\IGParte2\freeglut project 3D\freeglut project 3D.vcxproj" (Build destinos).
+         freeglut project 3D.vcxproj -> C:\hlocal\IGParte2\Debug\freeglut project 3D.exe
+     1>Compilación del proyecto terminada "C:\hlocal\IGParte2\freeglut project 3D\freeglut project 3D.vcxproj" (Build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:01.06
+Tiempo transcurrido 00:00:00.76

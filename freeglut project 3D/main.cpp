@@ -37,10 +37,22 @@ void CreaCoche(){
 		tapas[i] = gluNewQuadric();
 		
 		ruedas[i] = gluNewQuadric();
-	}
+	}	
 	glPushMatrix();
+
 	glScaled(0.3, 0.3, 0.3);
 	glutSolidCube(3);
+	glPushMatrix();
+	
+		glRotated(45, 0, 1, 0);
+		GLfloat lightpos[4] = { 0, 0, -1, 0 };
+		glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+	glPopMatrix();
+
+	glEnable(GL_LIGHT1);
+	//GLfloat dir[] = { hipo->C(t)->getX(), hipo->C(t)->getY(), hipo->C(t)->getZ(),1.0f };*/
+	//glLightfv(GL_LIGHT1, GL_POSITION, dir);
+
 	glPopMatrix();
 }
 void buildSceneObjects() {	 
@@ -63,6 +75,7 @@ void initGL() {
 	// Light0
 	glEnable(GL_LIGHTING);  
     glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
     GLfloat d[]={0.7f,0.5f,0.5f,1.0f};
     glLightfv(GL_LIGHT0, GL_DIFFUSE, d);
     GLfloat a[]={0.3f,0.3f,0.3f,1.0f};
@@ -71,7 +84,6 @@ void initGL() {
     glLightfv(GL_LIGHT0, GL_SPECULAR, s);
 	GLfloat p[]={25.0f, 25.0f, 25.0f, 1.0f};	 
 	glLightfv(GL_LIGHT0, GL_POSITION, p);
-
 	// Camera set up
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -116,15 +128,16 @@ void display(void) {
 		 		
 		// Drawing the scene	 		 
 		glColor3f(1.0, 1.0, 1.0);
-		hipo->dibuja();
+		//hipo->dibuja();
 		glPushMatrix();
-		glTranslated(hipo->C(t)->getX(), hipo->C(t)->getY(), hipo->C(t)->getZ());
+		glTranslated(t, 0, 0);
 		float movimientoCoche = 0;
-		movimientoCoche = atan2((double)hipo->C’(t)->getX(), (double)hipo->C’(t)->getZ()) * 180 / 3.141519;
-		glRotated(movimientoCoche + 45, 0, 1, 0);
+		movimientoCoche = 0;/*atan2((double)hipo->C’(t)->getX(), (double)hipo->C’(t)->getZ()) * 180 / 3.141519;*/
+		glRotated(movimientoCoche , 0, 1, 0);
 		CreaCoche();
-		//glutSolidSphere(6, 50, 60); //Sphere: radius=6, meridians=50, parallels=60
+		 //Sphere: radius=6, meridians=50, parallels=60
 	glPopMatrix();
+	glutSolidSphere(6, 50, 60);
 	
 	glFlush();
 	glutSwapBuffers();
