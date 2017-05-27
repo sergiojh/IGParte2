@@ -66,6 +66,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camara.cpp" />
     <ClCompile Include="Cara.cpp" />
     <ClCompile Include="FalsoTetraedro.cpp" />
     <ClCompile Include="Hipotrocoide.cpp" />
@@ -75,6 +76,7 @@
     <ClCompile Include="VerticeNormal.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camara.h" />
     <ClInclude Include="Cara.h" />
     <ClInclude Include="FalsoTetraedro.h" />
     <ClInclude Include="Hipotrocoide.h" />
