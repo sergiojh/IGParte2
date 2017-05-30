@@ -1,43 +1,46 @@
 #pragma once
-#include "PuntoVector3D.h"
+#include "Malla.h"
 class Camara
 {
 public:
-	Camara(PuntoVector3D * e, PuntoVector3D * l, PuntoVector3D *upp);
+	Camara(PuntoVector3D*eye, PuntoVector3D*look, PuntoVector3D*up);
 	~Camara();
-	void setCameraCoord();
-	void setMatrix();
-	void lookAt(PuntoVector3D * e, PuntoVector3D * l, PuntoVector3D * u);
-	void setOrtho(int left, int right, int bottom, int top, int nearr = -1, int farr = 1);
-	void setViewPort(GLint x, GLint y, GLint x2, GLint y2);
 	void roll();
+	void giraX();
 private:
+	//permiten definir la orientacion de la camara y su sistema de coordenadas.
+	PuntoVector3D*eye;
+	PuntoVector3D*look;
+	PuntoVector3D*up;
+	PuntoVector3D* u;
+	PuntoVector3D* v;
+	PuntoVector3D* n;
+	//distancia de dibujado
+	PuntoVector3D*d;
+	//atributos que permiten definir las dimensiones del volumen de vista.
+	//tienen que ser floats para el metodo glLoadMatrix
+	GLfloat left;
+	GLfloat right;
+	GLfloat top;
+	GLfloat bottom;
+	GLfloat near_;
+	GLfloat far_;
+	GLfloat fovy;
+	GLfloat aspect;
+	//radio de la circunferencia del giraX
+	GLfloat radio;
+	//matriz de coodenadas globales
+	GLfloat V[16];
+	//matriz de vista
+	GLfloat V’[16];
 
-	//Eye es el punto donde está la camara
-	PuntoVector3D * eye;
+	//angulos para ambas funciones
+	GLfloat anguloRoll = 0.1;
+	GLfloat anguloGiraX = 0;
 
-	//Look es el punto al que mira la camara
-	PuntoVector3D * look;
 
-	//Up es la orientación de la camara
-	PuntoVector3D *	up;
-
-	//El movimiento pitch es una rotación con respecto al eje U
-	//El movimiento yaw es una rotación con respecto al eje V
-	//El movimiento roll es una rotación con respecto al eje N
-	PuntoVector3D * u;
-	PuntoVector3D * v;
-	PuntoVector3D * n;
-
-	GLfloat W[16], Vp[16];
-
-	int left;
-	int right;
-	int top;
-	int bottom;
-	int nearr;
-	int farr;
-	int fovy;
-	int aspect;
+	void calcularMatriz();
+	void setValores();
+	void calculaInversaMatriz();
 };
 
