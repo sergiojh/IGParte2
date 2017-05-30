@@ -19,7 +19,7 @@ int WIDTH= 500, HEIGHT= 500;
 //cosas del coche
 GLfloat t = 0;
 GLfloat rotacionRuedas = 0;
-GLfloat scaleCoche = 0.2;
+GLfloat scaleCoche = 0.1;
 GLUquadric* obj;
 // Viewing frustum parameters
 GLdouble xRight=10, xLeft=-xRight, yTop=10, yBot=-yTop, N=1, F=1000;
@@ -40,56 +40,69 @@ GLfloat angX, angY, angZ;
 Hipotrocoide* hipo;
 Camara* camara;
 void CreaCoche(){
-
-	//glPopMatrix();
 	//activar y desactivar para pintar el coche mejor
+	//glPopMatrix();
+	
 
 	glPushMatrix();
+	//con esto hacemos que el coche se escale por completo, asi no hay que modiciar cada valor si cambiamos el coche
 	glScaled(scaleCoche, scaleCoche, scaleCoche);
-	glColor3d(0, 0.7, 0.3);
+
+	glColor3d(0, 0, 0);
 	glRotated(-90,0,1,0);
 
 
 	//ruedas
+	//rueda izquierda alante
 	glPushMatrix();
-	glRotated(rotacionRuedas, 0, 0, 1);
-	gluCylinder(obj, 1, 1, 1, 20, 1);
-	gluDisk(obj, 0.5, 1, 4, 1);
-	glTranslated(0, 0, 1);
-	gluDisk(obj, 0.5, 1, 4, 1);
-	glPopMatrix();
 
-	glPushMatrix();
 	glTranslated(6, 0, 1);
-	glRotated(rotacionRuedas, 0, 0, 1);
+	glRotated(-rotacionRuedas, 0, 0, 1);
 	gluCylinder(obj, 1, 1, 1, 20, 1);
 	gluDisk(obj, 0.5, 1, 4, 1);
 	glTranslated(0, 0, 1);
 	gluDisk(obj, 0.5, 1, 4, 1);
-	glPopMatrix();
 
+	glPopMatrix();
+	//rueda izquierda atrás
 	glPushMatrix();
+
+
+	glRotated(-rotacionRuedas, 0, 0, 1);
+	gluCylinder(obj, 1, 1, 1, 20, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
+	glTranslated(0, 0, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
+
+	glPopMatrix();
+	//rueda derecha atrás
+	glPushMatrix();
+
 	glTranslated(0, 0, 5);
-	glRotated(rotacionRuedas, 0, 0, 1);
+	glRotated(-rotacionRuedas, 0, 0, 1);
 	gluCylinder(obj, 1, 1, 1, 20, 1);
 	gluDisk(obj, 0.5, 1, 4, 1);
 	glTranslated(0, 0, 1);
 	gluDisk(obj, 0.5, 1, 4, 1);
-	glPopMatrix();
 
+	glPopMatrix();
+	//rueda derecha alante
 	glPushMatrix();
+
 	glTranslated(6, 0, 4);
-	glRotated(rotacionRuedas, 0, 0, 1);
+	glRotated(-rotacionRuedas, 0, 0, 1);
 	gluCylinder(obj, 1, 1, 1, 20, 1);
 	gluDisk(obj, 0.5, 1, 4, 1);
 	glTranslated(0, 0, 1);
 	gluDisk(obj, 0.5, 1, 4, 1);
+
 	glPopMatrix();
 
 
 
-	//Coche
+	//Chasis
 	glPushMatrix();
+
 	glColor3d(0.8, 0.1, 0.8);
 	glTranslated(-1, 2.5, 3);
 	glRotated(-10, 0, 0, 1);
@@ -99,19 +112,21 @@ void CreaCoche(){
 	gluDisk(obj, 0, 3.5, 4, 1);
 	glTranslated(0, 0, 10);
 	gluDisk(obj, 0, 1.5, 4, 1);
+
 	glPopMatrix();
 
 	//faros
 	glPushMatrix();
+
 	glColor3d(0, 1, 0);
 	glTranslated(8.5, 1.2, 2.4);
-	///////
+	
 
 	GLfloat amb[] = { 1, 1, 0, 1.0 };
 	GLfloat dif[] = { 1, 1, 1, 1 };
 	GLfloat spc[] = { 1, 1, 1, 1 };
 
-
+	//FARO 1
 	glLightfv(GL_LIGHT1, GL_AMBIENT, amb);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, dif);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, spc);
@@ -132,7 +147,7 @@ void CreaCoche(){
 	glRotated(-90, 0, 1, 0);
 
 
-
+	//FARO 2
 	glLightfv(GL_LIGHT2, GL_AMBIENT, amb);
 	glLightfv(GL_LIGHT2, GL_DIFFUSE, dif);
 	glLightfv(GL_LIGHT2, GL_SPECULAR, spc);
@@ -146,9 +161,10 @@ void CreaCoche(){
 
 	glRotated(90, 0, 1, 0);
 	gluCylinder(obj, 0.5, 0.5, 1, 20, 1);
+
 	glPopMatrix();
 
-
+	//CIERRA LA MATRIZ DEL INICIO DEL COCHE
 	glPopMatrix();
 
 
@@ -185,9 +201,9 @@ void initGL() {
 	// Light2
 	glEnable(GL_LIGHT2);
 	//cambiamos la light 0 como nosotros queremos
-	GLfloat d[] = { 1, 1, 1, 1.0f };
+	GLfloat d[] = { 0, 1, 0, 1.0f };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, d);
-	GLfloat a[] = { 0, 1, 0, 1.0f };
+	GLfloat a[] = { 0, 0, 0, 1.0f };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, a);
 	GLfloat s[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	glLightfv(GL_LIGHT0, GL_SPECULAR, s);
@@ -240,7 +256,10 @@ void display(void) {
 		 		
 		// Drawing the scene	 		 
 		glColor3f(1.0, 1.0, 1.0);
+		//dibujamos hipotrociode
+		
 		hipo->dibuja();
+		//movemos el coche alrededor de la hipotrocoide
 		glPushMatrix();
 		glTranslated(hipo->C(t)->getX(), hipo->C(t)->getY(), hipo->C(t)->getZ());
 		float movimientoCoche = 0;
@@ -248,10 +267,11 @@ void display(void) {
 		glRotated(movimientoCoche , 0, 1, 0);
 		CreaCoche();
 		 //Sphere: radius=6, meridians=50, parallels=60
-	glPopMatrix();
-	
-	glFlush();
-	glutSwapBuffers();
+
+		glPopMatrix();
+		glPopMatrix();
+		glFlush();
+		glutSwapBuffers();
 }
 
 
@@ -289,32 +309,39 @@ void key(unsigned char key, int x, int y){
 			//continue_in_main_loop = false; // (**)
 			//Freeglut's sentence for stopping glut's main loop (*)
 			glutLeaveMainLoop (); 
-			break;		 
+			break;	
+			//MOVER LA CÁMARA
 		case 'a': angX=angX+5; break;
 		case 'z': angX=angX-5; break; 
 		case 's': angY=angY+5; break;
 		case 'x': angY=angY-5; break;
 		case 'd': angZ=angZ+5; break;
 		case 'c': angZ=angZ-5; break;  
-		case 'w': t += 0.15; rotacionRuedas += 10; break;
-		case 'e': t -= 0.15; rotacionRuedas -= 10; break;
+			//MOVER EL COCHE
+		case 'f': t += 0.15; rotacionRuedas += 10; break;
+		case 'v': t -= 0.15; rotacionRuedas -= 10; break;
+			//ROLL
 		case 'q':
 			camara->roll();
 			break;
+			//GIRAX
 		case '1':
 			camara->giraX();
 			break;
+			//ENCENDER LUZ DE ARRIBA
 		case 'h':
 			glEnable(GL_LIGHT0);
 			break;
+			//APAGAR LUZ DE ARRIBA
 		case 'n':
 			glDisable(GL_LIGHT0);
 			break;
+			//ENCENDER FAROS
 		case 'g':
 			glEnable(GL_LIGHT1);
 			glEnable(GL_LIGHT2);
 			break;
-
+			//APAGAR LUCES
 		case 'b':
 			glDisable(GL_LIGHT1);
 			glDisable(GL_LIGHT2);
