@@ -16,7 +16,11 @@ using namespace std;
 
 // Viewport size
 int WIDTH= 500, HEIGHT= 500;
+//cosas del coche
 GLfloat t = 0;
+GLfloat rotacionRuedas = 0;
+GLfloat scaleCoche = 0.2;
+GLUquadric* obj;
 // Viewing frustum parameters
 GLdouble xRight=10, xLeft=-xRight, yTop=10, yBot=-yTop, N=1, F=1000;
 
@@ -37,28 +41,118 @@ Hipotrocoide* hipo;
 Camara* camara;
 void CreaCoche(){
 
-	//inicializo las ruedas
-	for (unsigned int i = 0; i < 4; i++){
-		tapas[i] = gluNewQuadric();
-		
-		ruedas[i] = gluNewQuadric();
-	}	
-	glPushMatrix();
+	//glPopMatrix();
+	//activar y desactivar para pintar el coche mejor
 
-	glScaled(0.3, 0.3, 0.3);
-	glutSolidCube(3);
 	glPushMatrix();
-	
-		glRotated(45, 0, 1, 0);
-		GLfloat lightpos[4] = { 0, 0, -1, 0 };
-		glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+	glScaled(scaleCoche, scaleCoche, scaleCoche);
+	glColor3d(0, 0.7, 0.3);
+	glRotated(-90,0,1,0);
+
+
+	//ruedas
+	glPushMatrix();
+	glRotated(rotacionRuedas, 0, 0, 1);
+	gluCylinder(obj, 1, 1, 1, 20, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
+	glTranslated(0, 0, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
 	glPopMatrix();
 
-	glEnable(GL_LIGHT1);
-	//GLfloat dir[] = { hipo->C(t)->getX(), hipo->C(t)->getY(), hipo->C(t)->getZ(),1.0f };*/
-	//glLightfv(GL_LIGHT1, GL_POSITION, dir);
+	glPushMatrix();
+	glTranslated(6, 0, 1);
+	glRotated(rotacionRuedas, 0, 0, 1);
+	gluCylinder(obj, 1, 1, 1, 20, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
+	glTranslated(0, 0, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(0, 0, 5);
+	glRotated(rotacionRuedas, 0, 0, 1);
+	gluCylinder(obj, 1, 1, 1, 20, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
+	glTranslated(0, 0, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(6, 0, 4);
+	glRotated(rotacionRuedas, 0, 0, 1);
+	gluCylinder(obj, 1, 1, 1, 20, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
+	glTranslated(0, 0, 1);
+	gluDisk(obj, 0.5, 1, 4, 1);
+	glPopMatrix();
+
+
+
+	//Coche
+	glPushMatrix();
+	glColor3d(0.8, 0.1, 0.8);
+	glTranslated(-1, 2.5, 3);
+	glRotated(-10, 0, 0, 1);
+	glRotated(45, 1, 0, 0);
+	glRotated(90, 0, 1, 0);
+	gluCylinder(obj, 3.5, 1.5, 10, 4, 1);
+	gluDisk(obj, 0, 3.5, 4, 1);
+	glTranslated(0, 0, 10);
+	gluDisk(obj, 0, 1.5, 4, 1);
+	glPopMatrix();
+
+	//faros
+	glPushMatrix();
+	glColor3d(0, 1, 0);
+	glTranslated(8.5, 1.2, 2.4);
+	///////
+
+	GLfloat amb[] = { 1, 1, 0, 1.0 };
+	GLfloat dif[] = { 1, 1, 1, 1 };
+	GLfloat spc[] = { 1, 1, 1, 1 };
+
+
+	glLightfv(GL_LIGHT1, GL_AMBIENT, amb);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, dif);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, spc);
+
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 50);
+	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 4);
+
+	GLfloat p[] = { 0.2, 0, 0, 1 };
+	GLfloat dir[] = { 1.0, 0.0, 0.0 };
+	glLightfv(GL_LIGHT1, GL_POSITION, p);
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, dir);
+
+	glRotated(90, 0, 1, 0);
+	gluCylinder(obj, 0.5, 0.5, 1, 20, 1);
+
+
+	glTranslated(-1, 0, 0);
+	glRotated(-90, 0, 1, 0);
+
+
+
+	glLightfv(GL_LIGHT2, GL_AMBIENT, amb);
+	glLightfv(GL_LIGHT2, GL_DIFFUSE, dif);
+	glLightfv(GL_LIGHT2, GL_SPECULAR, spc);
+
+	glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 50);
+	glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 4);
+
+	glLightfv(GL_LIGHT2, GL_POSITION, p);
+	glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
+
+
+	glRotated(90, 0, 1, 0);
+	gluCylinder(obj, 0.5, 0.5, 1, 20, 1);
+	glPopMatrix();
+
 
 	glPopMatrix();
+
+
+	glColor3d(0, 0, 1);
 }
 void buildSceneObjects() {	 
     angX=0.0f;
@@ -68,6 +162,8 @@ void buildSceneObjects() {
 	look = new PuntoVector3D(lookX, lookY, lookZ, 0);
 	up = new PuntoVector3D(upX, upY, upZ, 0);
 	camara = new Camara(eye, look, up);
+	hipo = new Hipotrocoide(10, 200, 14, 8, 4);
+	obj = gluNewQuadric();
 }
 
 void initGL() {	 		 
@@ -83,16 +179,23 @@ void initGL() {
 
 	// Light0
 	glEnable(GL_LIGHTING);  
-    glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT0);
+	// Light1
 	glEnable(GL_LIGHT1);
-    GLfloat d[]={0.7f,0.5f,0.5f,1.0f};
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, d);
-    GLfloat a[]={0.3f,0.3f,0.3f,1.0f};
-    glLightfv(GL_LIGHT0, GL_AMBIENT, a);
-	GLfloat s[]={1.0f,1.0f,1.0f,1.0f};
-    glLightfv(GL_LIGHT0, GL_SPECULAR, s);
-	GLfloat p[]={25.0f, 25.0f, 25.0f, 1.0f};	 
+	// Light2
+	glEnable(GL_LIGHT2);
+	//cambiamos la light 0 como nosotros queremos
+	GLfloat d[] = { 1, 1, 1, 1.0f };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, d);
+	GLfloat a[] = { 0, 1, 0, 1.0f };
+	glLightfv(GL_LIGHT0, GL_AMBIENT, a);
+	GLfloat s[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_SPECULAR, s);
+	GLfloat p[] = { 0, 10, 10, 0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, p);
+	GLfloat lmb[] = { 0, 0, 0, 1 };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmb);
+
 	// Camera set up
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -137,16 +240,15 @@ void display(void) {
 		 		
 		// Drawing the scene	 		 
 		glColor3f(1.0, 1.0, 1.0);
-		//hipo->dibuja();
+		hipo->dibuja();
 		glPushMatrix();
-		glTranslated(t, 0, 0);
+		glTranslated(hipo->C(t)->getX(), hipo->C(t)->getY(), hipo->C(t)->getZ());
 		float movimientoCoche = 0;
-		movimientoCoche = 0;/*atan2((double)hipo->C’(t)->getX(), (double)hipo->C’(t)->getZ()) * 180 / 3.141519;*/
+		movimientoCoche = atan2((double)hipo->C’(t)->getX(), (double)hipo->C’(t)->getZ()) * 180 / 3.141519;
 		glRotated(movimientoCoche , 0, 1, 0);
 		CreaCoche();
 		 //Sphere: radius=6, meridians=50, parallels=60
 	glPopMatrix();
-	glutSolidSphere(6, 50, 60);
 	
 	glFlush();
 	glutSwapBuffers();
@@ -194,8 +296,8 @@ void key(unsigned char key, int x, int y){
 		case 'x': angY=angY-5; break;
 		case 'd': angZ=angZ+5; break;
 		case 'c': angZ=angZ-5; break;  
-		case 'w': t += 0.15; break;
-		case 'e': t -= 0.15; break;
+		case 'w': t += 0.15; rotacionRuedas += 10; break;
+		case 'e': t -= 0.15; rotacionRuedas -= 10; break;
 		case 'q':
 			camara->roll();
 			break;
@@ -261,7 +363,6 @@ int main(int argc, char *argv[]){
     
 	// Classic glut's main loop can be stopped in freeglut using (*)
 	glutMainLoop(); 
-  
 	// We would never reach this point using classic glut
 	system("PAUSE"); 
    
