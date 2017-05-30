@@ -1,28 +1,30 @@
 #include "Camara.h"
 
 			//donde está posicionado	//donde mira		//hacia donde está orientado
-Camara::Camara(PuntoVector3D * eye, PuntoVector3D * look, PuntoVector3D *up) :eye(this->eye), look(this->look), up(this->up)
-{
+Camara::Camara(PuntoVector3D * eye, PuntoVector3D * look, PuntoVector3D *up){
 	//valores del volumen de vista
-	left = 15;
-	right = 15;
-	top = 15;
-	bottom = 15;
+	left = 10;
+	right = 10;
+	top = 10;
+	bottom = 10;
 	near_ = 1;
-	far_ = 500;
-	fovy = 15;
-	aspect = 15;
+	far_ = 1000;
+	fovy = 10;
+	aspect = 10;
+	this->eye = eye;
+	this->look = look;
+	this->up = up;
 
+	//matriz de vista
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(eye->getX(), eye->getY(), eye->getZ(), look->getX(), look->getY(), look->getZ(), up->getX(), up->getY(), up->getZ());
 
 	//matriz de proyeccion
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(left, right, bottom, top, near_, far_);
 
-	//matriz de vista
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(eye->getX(), eye->getY(), eye->getZ(), look->getX(), look->getY(), look->getZ(), up->getX(), up->getY(), up->getZ());
 
 	//damos los valores a u,v y n
 	setValores();
@@ -44,53 +46,45 @@ Camara::~Camara()
 }
 
 void Camara::roll(){
+	glMatrixMode(GL_MODELVIEW);
 	//PASO 1. CALCULAMOS U Y V GLOBALES
 	// coordenadas de u en globales
-	PuntoVector3D* uGlobal = 
-		new PuntoVector3D(u->getX()*cos(anguloRoll) + v->getX()*sin(anguloRoll),
-		u->getY()*cos(anguloRoll) + v->getY()*sin(anguloRoll),
-		u->getZ()*cos(anguloRoll) + v->getZ()*sin(anguloRoll),
-		0);
-	u = uGlobal;
+	PuntoVector3D* uGlobal = new PuntoVector3D(u->getX()* cos(anguloRoll) + v->getX() * sin(anguloRoll),
+		u->getY()* cos(anguloRoll) + v->getY() * sin(anguloRoll), u->getZ()* cos(anguloRoll) + v->getZ() * sin(anguloRoll), 0);
 
-	PuntoVector3D* vGlobal =
-		new PuntoVector3D(-u->getX()*sin(anguloRoll) + v->getX()*cos(anguloRoll),
-		-u->getY()*sin(anguloRoll) + v->getY()*cos(anguloRoll),
-		-u->getZ()*sin(anguloRoll) + v->getZ()*cos(anguloRoll),
-		0);
+	PuntoVector3D* vGlobal = new PuntoVector3D(-u->getX()* sin(anguloRoll) + v->getX() * cos(anguloRoll),
+		-u->getY()* sin(anguloRoll) + v->getY() * cos(anguloRoll), -u->getZ()* sin(anguloRoll) + v->getZ() * cos(anguloRoll), 0);
+
+	u = uGlobal;
 	v = vGlobal;
 	//PASO 2.CALCULAR MATRIZ NUEVA 
 	calcularMatriz();
 	//PASO 3. NUEVA MATRIZ DE VISTA QUE ES LA INVERSA
 	calculaInversaMatriz();
 	//PASO 4. CARGAR LA MATRIZ RESULTANTE COMO LA NUEVA MATRIZ DE VISTA
-	glMatrixMode(GL_MODELVIEW);
+
 	glLoadMatrixf(V’);
-
-	delete vGlobal;
-	delete uGlobal;
-
 }
 
 void Camara::giraX(){
+	//matriz de vista
+	glMatrixMode(GL_MODELVIEW);
 	//sumamos angulo
 	anguloGiraX += 0.05;
 
 	//radio
 	//Raiz(y^2 + z^2);
-	radio = sqrt(d->getY() + d->getZ() * d->getZ());
+	radio = sqrt(d->getY() * d->getY() + d->getZ() * d->getZ());
 
 	//Ponemos el nuevo Ojo
 	eye = new PuntoVector3D(eye->getX(), radio*sin(anguloGiraX), radio*cos(anguloGiraX), 1);
 
 	//damos valores a n,u y v
 	setValores();
-
 	//calculamos la matriz V
 	calcularMatriz();
 
-	//matriz de vista
-	glMatrixMode(GL_MODELVIEW);
+	
 	glLoadIdentity();
 	gluLookAt(eye->getX(), eye->getY(), eye->getZ(), look->getX(), look->getY(), look->getZ(), up->getX(), up->getY(), up->getZ());
 

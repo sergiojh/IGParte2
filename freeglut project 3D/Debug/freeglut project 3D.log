@@ -1,28 +1,5 @@
-﻿Compilación iniciada a las 28/05/2017 2:29:32.
-     1>Proyecto "C:\Users\Pablo Gómez\Desktop\IGParte2\freeglut project 3D\freeglut project 3D.vcxproj" en el nodo 2 (Build destinos).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Pablo Gómez\Desktop\IGParte2\freeglut\include\\" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camara.cpp Cara.cpp FalsoTetraedro.cpp Hipotrocoide.cpp main.cpp Malla.cpp PuntoVector3D.cpp VerticeNormal.cpp
-         VerticeNormal.cpp
-         PuntoVector3D.cpp
-         Malla.cpp
-         main.cpp
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\main.cpp(188): warning C4305: '+=' : truncamiento de 'double' a 'GLfloat'
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\main.cpp(189): warning C4305: '-=' : truncamiento de 'double' a 'GLfloat'
-         Hipotrocoide.cpp
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\hipotrocoide.cpp(31): warning C4244: 'argumento' : conversión de 'double' a 'GLfloat'; posible pérdida de datos
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\hipotrocoide.cpp(33): warning C4244: 'argumento' : conversión de 'GLdouble' a 'GLfloat'; posible pérdida de datos
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\hipotrocoide.cpp(48): warning C4244: 'argumento' : conversión de 'GLdouble' a 'GLfloat'; posible pérdida de datos
-         FalsoTetraedro.cpp
-         Cara.cpp
-         Camara.cpp
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\camara.cpp(66): error C2572: 'Camara::setOrtho' : nueva definición de parámetro predeterminado : parámetro 6
-                 c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\camara.h(11) : vea la declaración de 'Camara::setOrtho'
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\camara.cpp(66): error C2572: 'Camara::setOrtho' : nueva definición de parámetro predeterminado : parámetro 5
-                 c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\camara.h(11) : vea la declaración de 'Camara::setOrtho'
-     1>c:\users\pablo gómez\desktop\igparte2\freeglut project 3d\camara.cpp(81): warning C4305: 'inicializando' : truncamiento de 'double' a 'GLfloat'
-         Generando código...
-     1>Compilación del proyecto terminada "C:\Users\Pablo Gómez\Desktop\IGParte2\freeglut project 3D\freeglut project 3D.vcxproj" (Build destinos) -- ERROR.
+﻿Compilación iniciada a las 30/05/2017 17:38:22.
 
-ERROR al compilar.
+Compilación correcta.
 
-Tiempo transcurrido 00:00:02.34
+Tiempo transcurrido 00:00:00.00

@@ -3,6 +3,7 @@
 #include <gl/GLU.h>
 #include "Hipotrocoide.h"
 #include <GL/freeglut.h>
+#include "Camara.h"
 //#include <GL/glut.h>
 #include <vector>
 
@@ -24,12 +25,16 @@ GLdouble eyeX=100.0, eyeY=100.0, eyeZ=100.0;
 GLdouble lookX=0.0, lookY=0.0, lookZ=0.0;
 GLdouble upX=0, upY=1, upZ=0;
 
+PuntoVector3D* eye;
+PuntoVector3D* look;
+PuntoVector3D* up;
 // Scene variables
 std::vector <GLUquadric*> tapas(4);
 std::vector <GLUquadric*> ruedas(4);
 
 GLfloat angX, angY, angZ; 
 Hipotrocoide* hipo;
+Camara* camara;
 void CreaCoche(){
 
 	//inicializo las ruedas
@@ -59,6 +64,10 @@ void buildSceneObjects() {
     angX=0.0f;
     angY=0.0f;
     angZ=0.0f;	
+	eye = new PuntoVector3D(eyeX, eyeY, eyeZ, 1);
+	look = new PuntoVector3D(lookX, lookY, lookZ, 0);
+	up = new PuntoVector3D(upX, upY, upZ, 0);
+	camara = new Camara(eye, look, up);
 }
 
 void initGL() {	 		 
@@ -186,7 +195,29 @@ void key(unsigned char key, int x, int y){
 		case 'd': angZ=angZ+5; break;
 		case 'c': angZ=angZ-5; break;  
 		case 'w': t += 0.15; break;
-		case 'q': t -= 0.15;; break;
+		case 'e': t -= 0.15; break;
+		case 'q':
+			camara->roll();
+			break;
+		case '1':
+			camara->giraX();
+			break;
+		case 'h':
+			glEnable(GL_LIGHT0);
+			break;
+		case 'n':
+			glDisable(GL_LIGHT0);
+			break;
+		case 'g':
+			glEnable(GL_LIGHT1);
+			glEnable(GL_LIGHT2);
+			break;
+
+		case 'b':
+			glDisable(GL_LIGHT1);
+			glDisable(GL_LIGHT2);
+			break;
+
 		default:
 			need_redisplay = false;
 			break;
@@ -217,8 +248,10 @@ int main(int argc, char *argv[]){
 	glutDisplayFunc(display);
 
 	// OpenGL basic setting
+
 	initGL();
-	hipo = new Hipotrocoide(5, 150, 7, 4, 2);
+
+
 	// Freeglut's main loop can be stopped executing (**)
 	// while (continue_in_main_loop) glutMainLoopEvent();
 

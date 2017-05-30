@@ -35,7 +35,7 @@ private:
 	GLfloat V’[16];
 
 	//angulos para ambas funciones
-	GLfloat anguloRoll = 0.1;
+	GLfloat anguloRoll = 0.05;
 	GLfloat anguloGiraX = 0;
 
 
