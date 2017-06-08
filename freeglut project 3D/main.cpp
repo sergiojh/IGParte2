@@ -270,6 +270,8 @@ void display(void) {
 
 		glPopMatrix();
 		glPopMatrix();
+		GLfloat p[] = { 0, 10, 10, 0 };
+		glLightfv(GL_LIGHT0, GL_POSITION, p);
 		glFlush();
 		glutSwapBuffers();
 }
